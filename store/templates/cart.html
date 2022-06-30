@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Panier{% endblock title %}
+{% load static %}
+{% load custom_tags %}
+
+
+{% block content %}
+
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Panier shopping</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="{% url 'home' %}">Accueil<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{% url 'cart' %}">Panier</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Article</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col" style="width: 100px;">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in items %}
+                            <tr>
+                                <td class='p-0'>
+                                    <div class="media">
+
+                                        <div class="d-flex">
+                                            <a href="{% url 'product_detail' pk=item.product.id %}"></a>
+                                            <img src="{{ item.product.image.url }}" style="width: 100px;" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <p>{{ item.product.name }}</p>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>{{ item.product.price|number_format }}<span> €</span></h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <input type="text"   maxlength="12"
+                                               value="{{ item.quantity }}" onchange="input_change(this.value, this.dataset.id)" data-id="{{ item.product.id }}"
+                                               title="Quantity:" class="input-text qty">
+                                        <button class='update-cart increase items-count' data-id="{{ item.product.id }}"
+                                                data-action='add' data-image="{{ item.product.image }}"
+                                                data-price="{{ item.product.price|number_format }}"
+                                                type="button">
+                                            <i class="lnr lnr-chevron-up"></i></button>
+                                        <button
+                                                class='update-cart reduced items-count' data-id="{{ item.product.id }}"
+                                                data-action='remove' data-image="{{ item.product.image }}"
+                                                data-price="{{ item.product.price|number_format }}"
+                                                type="button">
+                                            <i class="lnr lnr-chevron-down"></i></button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>{{ item.get_total|number_format }}<span> €</span></h5>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        <tr class="out_button_area">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="checkout_btn_inner d-flex align-items-center">
+                                    <a class="gray_btn" style="padding-right:30px;padding-left:30px;"
+                                       href="{% url 'home' %}">Continuer</a>
+                                    {% if product_id > 0 %}
+                                        <a class="primary-btn" href="{% url 'checkout' %}"> Finaliser </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+
+{% endblock content %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block title %}Accueil{% endblock title %}
+{% load static %}
+{% load custom_tags %}
+
+
+{% block content %}
+
+
+
+<!-- start product Area -->
+
+<section class="features-area section_gap"  id="row" style="padding-bottom: 35px;">
+
+	<div class="container">
+		<div class="row justify-content-center" style="padding-top:70px;">
+			<div class="col-lg-6 text-center">
+				<div class="section-title">
+				<h1>Nouveautés</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row mx-auto">
+		<!-- all products -->
+		{% for product in products %}
+		<div class="col-lg-3 col-md-6">
+				<div class="single-product mx-auto">
+					<a href="{% url 'product_detail' product.id %}">
+					<img class="img-fluid" src="{{product.image.url}}" alt="" style="width:100%; height:250px;">
+				</a>
+					<div class="product-details">
+						<h6>{{product.name}}</h6>
+						<h6>{{product.brand.name}}</h6>
+						<div class="price">
+							<h6>{{product.price|number_format }}<span> €</span></h6>
+						</div>
+						<div class="prd-bottom">
+							<button data-id="{{product.id}}" data-action='add' data-image="{{product.image}}" data-price="{{product.price}}"
+								class="primary-btn update-cart">Ajouter <span class="ti-bag"></span></button>
+						</div>
+
+					</div>
+				</div>
+		</div>
+		{% endfor %}
+	</div>
+	</div>
+</section>
+
+
+
+<!-- end product Area -->
+
+
+<!-- Start brand Area -->
+<section class="brand-area section_gap" style="padding-top: 20px;">
+	<div class="container">
+		<div class="row">
+			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
+				src="{% static 'img/logos/adidas.png' %}" alt="">
+			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
+				src="{% static 'img/logos/levis.png' %}" alt="">
+			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
+				src="{% static 'img/logos/nike.png' %}" alt="">
+			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
+				src="{% static 'img/logos/puma.png' %}" alt="">
+			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
+				src="{% static 'img/logos/reebok.png' %}" alt="">
+		</div>
+	</div>
+</section>
+<!-- End brand Area -->
+
+<!-- start features Area -->
+<section class="features-area section_gap" style="padding-top: 20px;">
+	<div class="container">
+		<div class="row features-inner">
+			<!-- single features -->
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="{% static 'img/features/f-icon1.png' %}" alt="">
+					</div>
+					<h6>Livraison offerte</h6>
+					<p>dès 30€ d'achat</p>
+				</div>
+			</div>
+			<!-- single features -->
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="{% static 'img/features/f-icon2.png' %}" alt="">
+					</div>
+					<h6>Retours Gratuits</h6>
+					<p>Sous 14j. Voir conditions</p>
+				</div>
+			</div>
+			<!-- single features -->
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="{% static 'img/features/f-icon3.png' %}" alt="">
+					</div>
+					<h6>Support 7j/7 9h-20h</h6>
+					<p>A votre écoute</p>
+				</div>
+			</div>
+			<!-- single features -->
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="{% static 'img/features/f-icon4.png' %}" alt="">
+					</div>
+					<h6>Paiement sécurisé</h6>
+					<p>CB/VISA/Paypal</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end features Area -->
+
+
+
+{% endblock content %}
