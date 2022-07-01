@@ -143,7 +143,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
 # Logging configuration
-LOGGER = {
+LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
@@ -163,3 +163,9 @@ LOGGER = {
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 LOGIN_URL = 'login'
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+
+# Stripe API configuration
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')

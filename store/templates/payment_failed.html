@@ -4,7 +4,7 @@
 <div class="container">
     <div class="jumbotron text-center mt-5">
         <h1 class="text-danger">Le paiement à échoué</h1>
-        <p>Il s'agit probablement d'une erreur interne
+        <p>Il s'agit probablement d'une erreur interne. Un message d'erreur a été envoyé à l'administrateur.</p>
              <button class="clear-cart" onclick="myFunction()">Retour à l'accueil</button>.
         </p>
     </div>
@@ -17,7 +17,7 @@
 function myFunction(){
         localStorage.clear()
         location.reload()
-        return ({% url 'shop:home' %})
+        return 'https://trailingcoin.com';
 }
 </script>
 {% endblock javascript %}

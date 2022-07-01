@@ -1,15 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Accueil{% endblock title %}
+{% block title %}e-commerce{% endblock title %}
 {% load static %}
 {% load custom_tags %}
 
-
 {% block content %}
 
-
-
 <!-- start product Area -->
-
 <section class="features-area section_gap"  id="row" style="padding-bottom: 35px;">
 
 	<div class="container">
@@ -38,12 +34,11 @@
 							<button data-id="{{product.id}}" data-action='add' data-image="{{product.image}}" data-price="{{product.price}}"
 								class="primary-btn update-cart">Ajouter <span class="ti-bag"></span></button>
 						</div>
-
+                    </div>
 					</div>
 				</div>
 		</div>
 		{% endfor %}
-	</div>
 	</div>
 </section>
 

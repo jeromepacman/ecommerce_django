@@ -1,13 +1,11 @@
 import stripe
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
 
 from django.http import Http404, JsonResponse, HttpResponseNotFound
 from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
-
+from django.contrib import messages
 from ecommerce.prod_settings import STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY
 from .models import Product, Category, Brand
 from .tasks import send_confirmation_email_task
@@ -32,12 +30,13 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = "product_detail.html"
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None, request=None):
         try:
             category = self.get_queryset().get(pk=self.kwargs["pk"]).category
             return category
 
         except self.get_queryset().model.DoesNotExist:
+            messages.error(request, "Produit non trouvé, erreur 404")
             raise Http404("Product not found")
 
     def get_context_data(self, **kwargs):
@@ -128,7 +127,7 @@ class ConfirmationView(View):
 
     def get(self, request):
         send_confirmation_email_task(request)
-        return redirect('shop:home')
+        return redirect('home')
 
 
 class CreateCheckoutSession(View):
@@ -156,7 +155,7 @@ class CreateCheckoutSession(View):
 
         checkout_session = stripe.checkout.Session.create(
 
-            customer_email=self.request.user.email,
+            customer_email=self.request.user.username,
             payment_method_types=['card'],
             line_items=lineitems,
             mode='payment',

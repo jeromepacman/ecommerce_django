@@ -1,7 +1,6 @@
 from celery import shared_task
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
-
 from ecommerce import logger
 from ecommerce.prod_settings import EMAIL_HOST_USER
 
@@ -9,7 +8,7 @@ from ecommerce.prod_settings import EMAIL_HOST_USER
 @shared_task
 def send_confirmation_email_task(request):
     try:
-        send_mail(subject="Commande validée!", message="Hello {0}, Nous allons procéder au traitement de votre commande".format(request.user),
+        send_mail(subject="Commande validée!", message="Hello {0}, Nous allons procéder à son traitement".format(request.user),
                   from_email=EMAIL_HOST_USER, recipient_list=[request.user.email])
         return
     except Exception as ex:

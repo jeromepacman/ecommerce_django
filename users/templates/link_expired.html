@@ -3,7 +3,7 @@
 
 {% load static %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Réinitialisation mot de passe{% endblock %}
 {% block content %}
 
 <section class="banner-area organic-breadcrumb">
@@ -12,7 +12,7 @@
             <div class="col-first">
                 <h1>Login</h1>
                 <nav class="d-flex align-items-center">
-                    <a href="{% url 'shop:home' %}">Accueil<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{% url 'shop:home' %}">Accueil<span>—></span></a>
                 </nav>
             </div>
         </div>
@@ -26,16 +26,15 @@
                 <div class="login_box_img">
                     <img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
                     <div class="hover">
-                        <h4>Don't have an account?</h4>
-                        <p>There are advances being made in science and technology everyday, and a good example of this
-                            is the</p>
+                        <h4>Pas de compte?</h4>
+                        <p>Enregistrez vous en quelques clics</p>
                         <a class="primary-btn" href="{% url 'accounts:register' %}">Sign up</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="login_form_inner">
-                    <p>Looks like you have tried opening an expired URL.</p>
+                    <p>Il semble que la page a besoin d'être rafraichie...</p>
 
                     <p><a href="{% url 'accounts:login' %}">Log in</a></p>
                 </div>
