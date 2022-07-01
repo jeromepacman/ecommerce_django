@@ -12,7 +12,7 @@
             <div class="col-first">
                 <h1>Login</h1>
                 <nav class="d-flex align-items-center">
-                    <a href="{% url 'home' %}">Accueil<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{% url 'shop:home' %}">Accueil<span class="lnr lnr-arrow-right"></span></a>
                 </nav>
             </div>
         </div>
@@ -29,7 +29,7 @@
                         <h4>Don't have an account?</h4>
                         <p>There are advances being made in science and technology everyday, and a good example of this
                             is the</p>
-                        <a class="primary-btn" href="{% url 'register' %}">Sign up</a>
+                        <a class="primary-btn" href="{% url 'accounts:register' %}">Sign up</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="login_form_inner">
                     <p>Looks like you have tried opening an expired URL.</p>
 
-                    <p><a href="{% url 'login' %}">Log in</a></p>
+                    <p><a href="{% url 'accounts:login' %}">Log in</a></p>
                 </div>
             </div>
         </div>

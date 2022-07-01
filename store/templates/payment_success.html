@@ -9,7 +9,7 @@
     <div class="jumbotron text-center mt-5">
         <h1 class="text-success">Paiement validé</h1>
 
-        <button class="clear-cart" id="home" data-url_root="{% url 'home' %}" onclick="myFunction()">Retour accueil
+        <button class="clear-cart" id="home" data-url_root="{% url 'shop:home' %}" onclick="myFunction()">Retour accueil
         </button>
 
     </div>
@@ -19,10 +19,8 @@
 {% block javascript %}
 <script>
     async function myFunction() {
-        location.href = "/shop/"
+        location.href = "https://trailingcoin.com"
     }
-
-
 
 
 </script>

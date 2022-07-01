@@ -16,7 +16,7 @@
 		<div class="row justify-content-center" style="padding-top:70px;">
 			<div class="col-lg-6 text-center">
 				<div class="section-title">
-				<h1>Nouveautés</h1>
+				<h2 class="">Nouveautés</h2>
 				</div>
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 		{% for product in products %}
 		<div class="col-lg-3 col-md-6">
 				<div class="single-product mx-auto">
-					<a href="{% url 'product_detail' product.id %}">
+					<a href="{% url 'shop:product_detail' product.id %}">
 					<img class="img-fluid" src="{{product.image.url}}" alt="" style="width:100%; height:250px;">
 				</a>
 					<div class="product-details">
@@ -57,15 +57,15 @@
 	<div class="container">
 		<div class="row">
 			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
-				src="{% static 'img/logos/adidas.png' %}" alt="">
+				src="{% static 'img/logos/adidas.png' %}" alt="adidas">
 			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
-				src="{% static 'img/logos/levis.png' %}" alt="">
+				src="{% static 'img/logos/levis.png' %}" alt="levis">
 			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
-				src="{% static 'img/logos/nike.png' %}" alt="">
+				src="{% static 'img/logos/nike.png' %}" alt="nike">
 			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
-				src="{% static 'img/logos/puma.png' %}" alt="">
+				src="{% static 'img/logos/puma.png' %}" alt="puma">
 			<img class="img-fluid d-block mx-auto" style='height: 200px; width: 200px;'
-				src="{% static 'img/logos/reebok.png' %}" alt="">
+				src="{% static 'img/logos/reebok.png' %}" alt="puma">
 		</div>
 	</div>
 </section>
@@ -79,7 +79,7 @@
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="single-features">
 					<div class="f-icon">
-						<img src="{% static 'img/features/f-icon1.png' %}" alt="">
+						<img src="{% static 'img/features/f-icon1.png' %}" alt="icon1">
 					</div>
 					<h6>Livraison offerte</h6>
 					<p>dès 30€ d'achat</p>
@@ -89,7 +89,7 @@
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="single-features">
 					<div class="f-icon">
-						<img src="{% static 'img/features/f-icon2.png' %}" alt="">
+						<img src="{% static 'img/features/f-icon2.png' %}" alt="icon2">
 					</div>
 					<h6>Retours Gratuits</h6>
 					<p>Sous 14j. Voir conditions</p>
@@ -99,7 +99,7 @@
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="single-features">
 					<div class="f-icon">
-						<img src="{% static 'img/features/f-icon3.png' %}" alt="">
+						<img src="{% static 'img/features/f-icon3.png' %}" alt=icon3">
 					</div>
 					<h6>Support 7j/7 9h-20h</h6>
 					<p>A votre écoute</p>
@@ -109,7 +109,7 @@
 			<div class="col-lg-3 col-md-6 col-sm-6">
 				<div class="single-features">
 					<div class="f-icon">
-						<img src="{% static 'img/features/f-icon4.png' %}" alt="">
+						<img src="{% static 'img/features/f-icon4.png' %}" alt="icon4">
 					</div>
 					<h6>Paiement sécurisé</h6>
 					<p>CB/VISA/Paypal</p>

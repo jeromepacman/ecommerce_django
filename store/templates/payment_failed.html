@@ -3,9 +3,8 @@
 {% block content %}
 <div class="container">
     <div class="jumbotron text-center mt-5">
-        <h1 class="text-danger">Payment Failed</h1>
-        <p>We received your order. You can now close this window or use the
-            link below to visit
+        <h1 class="text-danger">Le paiement à échoué</h1>
+        <p>Il s'agit probablement d'une erreur interne
              <button class="clear-cart" onclick="myFunction()">Retour à l'accueil</button>.
         </p>
     </div>
@@ -18,6 +17,7 @@
 function myFunction(){
         localStorage.clear()
         location.reload()
+        return ({% url 'shop:home' %})
 }
 </script>
 {% endblock javascript %}

@@ -18,7 +18,7 @@ class User(AbstractUser):
 
 class ShippingAddress(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_shipping_address")
-    address_one = models.CharField(max_length=250, null=True, blank=True)
+    address_one = models.CharField("Adresse", max_length=250, null=True, blank=True)
     zipcode = models.CharField(max_length=10, null=True, blank=True)
     address_two = models.CharField("Ville", max_length=100, null=True, blank=True)
 

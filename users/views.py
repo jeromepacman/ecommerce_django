@@ -2,15 +2,13 @@ from django.contrib import messages
 from django.contrib.auth import login as auth_login, logout as auth_logout, update_session_auth_hash
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-
-from ecommerce.settings import EMAIL_HOST_USER
+from ecommerce.prod_settings import EMAIL_HOST_USER
 from store.tasks import send_reset_email_task
 from users.forms import UserRegisterForm, EditProfileForm, LoginForm, ForgotPasswordForm, \
     ResetPasswordForm, ChangePasswordForm
 from users.models import Profile, ShippingAddress, ForgotPassword, User
 from ecommerce import logger
 from store.utils import cookiecart
-
 
 def register(request):
     """
@@ -26,7 +24,7 @@ def register(request):
                 Profile.objects.create(user=obj, mobile_no=form.cleaned_data.get('mobile_no', None),
                                        alt_mobile_no=form.cleaned_data.get('alt_mobile_no', None))
             logger.info("User registered successfully")
-            messages.info(request, "Enregistrement validé, vous pouvez vous identifier" )
+            messages.info(request, "Enregistrement terminé, vous pouvez vous identifier" )
             return redirect("login")
         return render(request, "registration.html", {"form": form, "cartitems": cookiecart(request)['cartitems']})
     except Exception as ex:
@@ -49,11 +47,11 @@ def login(request):
             logger.info("User with name {0} logged in successfully".format(form.get_user()))
             return redirect("home")
         logger.info("User entered invalid login credentials")
-        return render(request, "login.html", {"form": form, "cartitems": cookiecart(request)['cartitems']})
+        return render(request, template_name="login.html", context={"form": form, "cartitems": cookiecart(request)['cartitems']})
     except Exception as ex:
-        logger.info("Exception raised in logging in  user -- {0}".format(ex.args))
+        logger.info("Exception raised in logging in user -- {0}".format(ex.args))
         return render(request, template_name="login.html",
-                      context={"form": form, "cartitems": cookiecart(request)['cartitems']})
+                      context={"form": form, "cartitems": (cookiecart(request)['cartitems'])})
 
 
 @login_required(login_url="login")
@@ -132,11 +130,11 @@ def forgot_password(request):
             ForgotPassword.objects.create(user=user)
             send_reset_email_task(subject="Reset your password", context={"user": user}, from_email=EMAIL_HOST_USER,
                                   to=[user.email], html_email_template_name="email_template.html")
-            logger.info("Reset password link sent to user successfully")
+            logger.info("Un lien pour initialisé votre mot de passe vous a été envoyé")
             messages.success(request,
-                             message="Un email vous a été envoyé, consulter votre courrier, merci.",
+                             message="Un email vous a été envoyé, veuillez consulter votre courriel, merci.",
                              )
-            return redirect('login')
+            return redirect('accounts:login')
         return render(request, template_name="forgot_password.html",
                       context={"form": form, "cartitems": cookiecart(request)['cartitems']})
     except Exception as ex:

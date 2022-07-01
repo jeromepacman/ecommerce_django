@@ -12,8 +12,8 @@
                 <div class="col-first">
                     <h1>Login</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{% url 'home' %}">Accueil<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{% url 'login' %}">log in</a>
+                        <a href="{% url 'shop:home' %}">Accueil<span>—></span></a>
+                        <a href="{% url 'accounts:login' %}">log in</a>
                     </nav>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                         <img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
                         <div class="hover">
                             <h4>Vous n'avez pas encore de compte?</h4>
-                            <p>Créer en un en quelques clicks...</p>
-                            <a class="primary-btn" href="{% url 'register' %}">S'enregistrer</a>
+                            <p>Créer en un en quelques clics...</p>
+                            <a class="primary-btn" href="{% url 'accounts:register' %}">S'enregistrer</a>
                         </div>
                     </div>
                 </div>
@@ -52,8 +52,8 @@
                             <div class="col-md-12 form-group">
                                 <button type="submit" value="submit" class="primary-btn">Login</button>
                             </div>
-                            <p class="pt-4 pl-4">Vous n'avez pas de compte?<a href="{% url 'register' %}"> s'enregistrer</a></p>
-                            <p class="pt-4 pl-4"><a href="{% url 'forgot_password' %}">Mot de passe perdu?</a></p>
+
+                            <p class="pt-4 pl-4"><a href="{% url 'accounts:forgot_password' %}">mot de passe perdu?</a></p>
                         </form>
                     </div>
                 </div>

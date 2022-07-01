@@ -10,8 +10,8 @@
             <div class="col-first">
                 <h1>S'enregistrer</h1>
                 <nav class="d-flex align-items-center">
-                    <a href="{% url 'home' %}">Accueil<span class="lnr lnr-arrow-right"></span></a>
-                    <a href="{% url 'register' %}">S'enregistrer</a>
+                    <a href="{% url 'shop:home' %}">Accueil<span>—></span></a>
+                    <a href="{% url 'accounts:register' %}">S'enregistrer</a>
                 </nav>
             </div>
         </div>
@@ -27,9 +27,9 @@
                 <div class="login_box_img">
                     <img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
                     <div class="hover">
-                        <h4>Vous avez un compte?</h4>
+                        <h4>Vous avez déjà un compte?</h4>
                         <p>Suivez le lien pour vous identifier</p>
-                        <a class="primary-btn" href="{% url 'login' %}">Login</a>
+                        <a class="primary-btn" href="{% url 'accounts:login' %}">Login</a>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                         <div class="col-md-12 form-group">
                             <button type="submit" value="submit" class="primary-btn">S'enregistrer</button>
                         </div>
-                        <p class="pt-4 pl-4">Vous avez déjà un compte? <a href="{% url 'login' %}">S'identifier</a></p>
+                        <p class="pt-4 pl-4"><a href="{% url 'accounts:login' %}">supprimer son compte</a></p>
                     </form>
                 </div>
             </div>

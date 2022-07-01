@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 #      }
 #  }
 DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': BASE_DIR / 'db.sqlite3',
-     }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Custom user model
@@ -142,9 +142,8 @@ CELERY_BROKER_URL = ''
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
-
 # Logging configuration
-LOGGING = {
+LOGGER = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
@@ -162,3 +161,5 @@ LOGGING = {
 
 # Primary key configuration for Django version 3+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+LOGIN_URL = 'login'

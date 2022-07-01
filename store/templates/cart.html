@@ -14,8 +14,8 @@
                 <div class="col-first">
                     <h1>Panier shopping</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="{% url 'home' %}">Accueil<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="{% url 'cart' %}">Panier</a>
+                        <a href="{% url 'shop:home' %}">Accueil<span>—></span></a>
+                        <a href="{% url 'shop:cart' %}">Panier</a>
                     </nav>
                 </div>
             </div>
@@ -44,8 +44,8 @@
                                     <div class="media">
 
                                         <div class="d-flex">
-                                            <a href="{% url 'product_detail' pk=item.product.id %}"></a>
-                                            <img src="{{ item.product.image.url }}" style="width: 100px;" alt="">
+                                            <a href="{% url 'shop:product_detail' pk=item.product.id %}"></a>
+                                            <img src="{{ item.product.image.url }}" style="width: 100px;" alt="thumbnail">
                                         </div>
                                         <div class="media-body">
                                             <p>{{ item.product.name }}</p>
@@ -58,7 +58,7 @@
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="text"   maxlength="12"
+                                        <input type="text"   maxlength="2"
                                                value="{{ item.quantity }}" onchange="input_change(this.value, this.dataset.id)" data-id="{{ item.product.id }}"
                                                title="Quantity:" class="input-text qty">
                                         <button class='update-cart increase items-count' data-id="{{ item.product.id }}"
@@ -87,9 +87,11 @@
                             <td>
                                 <div class="checkout_btn_inner d-flex align-items-center">
                                     <a class="gray_btn" style="padding-right:30px;padding-left:30px;"
-                                       href="{% url 'home' %}">Continuer</a>
+                                       href="{% url 'shop:home' %}">Continuer</a>
                                     {% if product_id > 0 %}
-                                        <a class="primary-btn" href="{% url 'checkout' %}"> Finaliser </a>
+                                        <a class="ml-2 primary-btn" href="{% url 'shop:checkout' %}"> Finaliser </a>
+                                        {% else %}
+                                        <span class="ml-5">Rien pour l'instant</span>
                                     {% endif %}
                                 </div>
                             </td>

@@ -14,8 +14,8 @@
 			<div class="col-first">
 				<h1>Produits par catégorie</h1>
 				<nav class="d-flex align-items-center">
-					<a href="{% url 'home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
-					<a href="{% url 'categories' %}">Catégories</a>
+					<a href="{% url 'shop:home' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="{% url 'shop:categories' %}">Catégories</a>
 				</nav>
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 				<div class="head">Genres</div>
 				<ul class="main-categories">
 					{% for category in categories %}
-					<li class="main-nav-list"><a href="{% url 'product_by_category' pk=category.id %}">{{category.name}}</a>
+					<li class="main-nav-list"><a href="{% url 'shop:product_by_category' pk=category.id %}">{{category.name}}</a>
 					</li>
 					{% endfor %}
 				</ul>
@@ -39,7 +39,7 @@
 					<div class="head">Marques</div>
 					<ul class="main-categories">
 						{% for brand in brands %}
-						<li class="main-nav-list"><a href="{% url 'product_by_brand' pk=brand.id %}">
+						<li class="main-nav-list"><a href="{% url 'shop:product_by_brand' pk=brand.id %}">
 								{{brand.name}}</a>
 						</li>
 						{% endfor %}
@@ -55,7 +55,7 @@
 					<div class="col-lg-4 col-md-6">
 
 						<div class="single-product mx-auto">
-							<a href="{% url 'product_detail' product.id %}">
+							<a href="{% url 'shop:product_detail' product.id %}">
 								<img class="img-fluid" src="{{product.image.url}}" alt=""
 									style="width:100%; height:250px;">
 							</a>

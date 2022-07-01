@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="favicon.ico'">
+    <link rel="shortcut icon" href="favicon.ico">
     <!-- Author Meta -->
     <meta name="author" content="">
     <!-- Meta Description -->
@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
     <style>
         span.cart-basket.d-flex.align-items-center.justify-content-center {
             font-size: .5rem;
@@ -105,14 +106,14 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Accueil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'shop:home' %}">Accueil</a></li>
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Boutique</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="{% url 'categories' %}">Catégories
+                                <li class="nav-item"><a class="nav-link" href="{% url 'shop:categories' %}">Catégories
                                     </a></li>
-                                <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Mon panier</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'shop:cart' %}">Mon panier</a></li>
 
                             </ul>
                         </li>
@@ -125,12 +126,12 @@
                                                                                    alt="user logo"
                                                                                    style="width: 30px;"></a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'edit_profile' %}">Mes
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:edit_profile' %}">Mes
                                         infos</a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'change_password' %}">Mot de passe</a>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:change_password' %}">Mot de passe</a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Déconnexion</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Déconnexion</a></li>
                                 </ul>
                             </li>
                         {% else %}
@@ -141,9 +142,9 @@
                                                                                    alt=""
                                                                                    style="width: 30px;"></a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">S'identifier</a>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">S'identifier</a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">S'enregistrer</a>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">S'enregistrer</a>
                                     </li>
                                 </ul>
                             </li>
@@ -153,7 +154,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item" style="position: relative">
-                            <a href="{% url 'cart' %}" class="cart">
+                            <a href="{% url 'shop:cart' %}" class="cart">
                                 <i class="fas fa fa-shopping-cart fa-lg" style="color:#101011;"></i>
                                 <span class="cart-basket d-flex align-items-center justify-content-center">
                                 {{ cartitems }}
@@ -167,6 +168,8 @@
     </div>
 </header>
 <!-- End Header Area -->
+
+{% include 'base_message.html' %}
 
 {% block content %} {% endblock content %}
 {% block javascript %}

@@ -290,7 +290,7 @@ $(document).ready(function(){
         $('.have-btn span').text(function(i, text){
           return text === "Have a Coupon?" ? "Close Coupon" : "Have a Coupon?";
         })
-        $('.cupon-code').fadeToggle("slow");
+        $('.coupon-code').fadeToggle("slow");
     });
 
     $('.load-more-btn').on('click', function(e){

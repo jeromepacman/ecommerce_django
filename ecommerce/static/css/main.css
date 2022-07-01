@@ -75,7 +75,7 @@
   -webkit-text-fill-color: transparent; }
 
 
-html{}
+
 /* Start primary btn css
 ============================================================================================ */
 .primary-btn {
@@ -135,7 +135,11 @@ ul {
   padding: 0;
   list-style: none; }
 
-h1,
+h1{
+  text-shadow: 4px -3px 2px rgba(150, 123, 150, 0.56);
+}
+
+
 h2,
 h3,
 h4,

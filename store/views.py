@@ -1,13 +1,14 @@
 import stripe
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+
 from django.http import Http404, JsonResponse, HttpResponseNotFound
 from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
 
-from ecommerce.settings import STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY
+from ecommerce.prod_settings import STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY
 from .models import Product, Category, Brand
 from .tasks import send_confirmation_email_task
 from .utils import cookiecart
@@ -127,15 +128,14 @@ class ConfirmationView(View):
 
     def get(self, request):
         send_confirmation_email_task(request)
-        return redirect('home')
+        return redirect('shop:home')
 
 
-class Createcheckoutsession(View):
+class CreateCheckoutSession(View):
     """
         https://stripe.com/docs/api/checkout/sessions/create?lang=python
         Create a payment checkout session for cart items with stripe
     """
-
     def post(self, request, **kwargs):
         get_object_or_404(Product, pk=self.kwargs['pk'])
         stripe.api_key = STRIPE_SECRET_KEY
@@ -156,14 +156,14 @@ class Createcheckoutsession(View):
 
         checkout_session = stripe.checkout.Session.create(
 
-            customer_email=request.POST['email'],
+            customer_email=self.request.user.email,
             payment_method_types=['card'],
             line_items=lineitems,
             mode='payment',
             success_url=request.build_absolute_uri(
-                reverse('success')
+                reverse("shop:success")
             ) + "?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url=request.build_absolute_uri(reverse('failed')),
+            cancel_url=request.build_absolute_uri(reverse('shop:failed')),
         )
         return JsonResponse({'sessionId': checkout_session.id})
 
@@ -172,7 +172,6 @@ class PaymentSuccessView(TemplateView):
     """
         Redirects to payment success page for current session and manages product stock.
     """
-
     template_name = "payment_success.html"
 
     def get(self, request, *args, **kwargs):
