@@ -26,7 +26,7 @@ def register(request):
                 Profile.objects.create(user=obj, mobile_no=form.cleaned_data.get('mobile_no', None),
                                        alt_mobile_no=form.cleaned_data.get('alt_mobile_no', None))
             logger.info("User registered successfully")
-            messages.info(request, "Enregistrement validé" )
+            messages.info(request, "Enregistrement validé, vous pouvez vous identifier" )
             return redirect("login")
         return render(request, "registration.html", {"form": form, "cartitems": cookiecart(request)['cartitems']})
     except Exception as ex:
@@ -134,7 +134,7 @@ def forgot_password(request):
                                   to=[user.email], html_email_template_name="email_template.html")
             logger.info("Reset password link sent to user successfully")
             messages.success(request,
-                             message="An email with reset password link is sent to you. Please check your inbox.",
+                             message="Un email vous a été envoyé, consulter votre courrier, merci.",
                              )
             return redirect('login')
         return render(request, template_name="forgot_password.html",

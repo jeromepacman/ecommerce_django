@@ -42,7 +42,7 @@
     right: 12px;
     top: 50%;
     -webkit-transform-origin: 66% 66%;
-        -ms-transform-origin: 66% 66%;
+
             transform-origin: 66% 66%;
     -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
@@ -100,7 +100,7 @@
     top: 100%;
     left: 0;
     -webkit-transform-origin: 50% 0;
-        -ms-transform-origin: 50% 0;
+
             transform-origin: 50% 0;
     -webkit-transform: scale(0.75) translateY(-21px);
         -ms-transform: scale(0.75) translateY(-21px);
