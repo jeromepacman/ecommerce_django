@@ -89,8 +89,12 @@
                                     <a class="gray_btn" style="padding-right:30px;padding-left:30px;"
                                        href="{% url 'shop:home' %}">Continuer</a>
                                     {% if product_id > 0 %}
-                                        <a class="ml-2 primary-btn" href="{% url 'shop:checkout' %}"> Finaliser </a>
+                                        {% if request.user.is_authenticated %}
+                                            <a class="ml-2 primary-btn" href="{% url 'shop:checkout' %}"> Finaliser </a>
                                         {% else %}
+                                            <a class="ml-2 primary-btn" href="{% url 'accounts:login' %}"> Finaliser </a>
+                                        {% endif %}
+                                    {% else %}
                                         <span class="ml-5">Rien pour l'instant</span>
                                     {% endif %}
                                 </div>

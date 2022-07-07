@@ -4,24 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="favicon.ico">
-    <!-- Author Meta -->
-    <meta name="author" content="">
-    <!-- Meta Description -->
-    <meta name="description" content="">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+    <meta name="description" content="Site de démonstration ©TView.fr">
     <!-- Meta Keyword -->
     <meta name="keywords" content="">
-    <!-- meta character set -->
-
+    <meta name="author" content="TView.fr">
     <!-- Site Title -->
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %}Demo shop{% endblock title %}</title>
 
     <!--	CSS ============================================= -->
+    <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
     <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+
     <style>
         span.cart-basket.d-flex.align-items-center.justify-content-center {
             font-size: .5rem;
@@ -82,7 +79,6 @@
             $(".message").fadeOut("slow");
         }, 3000);
 
-
     </script>
 </head>
 
@@ -91,11 +87,11 @@
 <header class="header_area sticky-header">
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light main_box">
-            <div class="container">
+            <span class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <a class="navbar-brand logo_h" href="https://tview.fr/" target="_blank"><img
                         src="{% static 'img/logo.png' %}"
-                        alt=""></a>
+                        alt="logo"></a><span>{% include 'base_message.html' %}</span>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -109,12 +105,11 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'shop:home' %}">Accueil</a></li>
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">Boutique</a>
+                               aria-haspopup="true" aria-expanded="true">Boutique</a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="{% url 'shop:categories' %}">Catégories
                                     </a></li>
                                 <li class="nav-item"><a class="nav-link" href="{% url 'shop:cart' %}">Mon panier</a></li>
-
                             </ul>
                         </li>
                         {% if request.user.is_authenticated %}
@@ -169,8 +164,6 @@
 </header>
 <!-- End Header Area -->
 
-{% include 'base_message.html' %}
-
 {% block content %} {% endblock content %}
 {% block javascript %}
 {% endblock javascript %}
@@ -191,7 +184,7 @@
                         Ce site démo permet de tester l'interface et de simuler des achats.
                         Il s'agit d'un aperçu. Il n'y a pas de vérification de stock.
                         Vous pouvez agir tel un client, jusqu'à la simulation du paiement en carte bancaire.
-                        Le no de carte VISA est le <br>4242 4242 4242 4242 (c'est celui fourni par <a class="text-btn" href="https://stripe.com">Stripe</a>).<br>
+                        Le no de carte VISA est le 4242 4242 4242 4242" (no factice pour validation avec <a class="text-btn" href="https://stripe.com">Stripe</a>).<br>
                         Les autres informations peuvent être remplies à votre guise.
                     </p>
                 </div>
@@ -199,7 +192,7 @@
             <div class="col-lg-3  col-md-6 col-sm-6">
                 <div class="single-footer-widget">
                     <h6>Contact, Infos</h6>
-                    <p><a href="https://www.tview.fr/contact"
+                    <p><a href="https://tview.fr/contact"
                            target="_blank">TrailingView</a>
                     </p>
                 </div>
@@ -236,7 +229,6 @@
 
 
 <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
 <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
 <script src="{% static 'js/jquery.sticky.js' %}"></script>
 <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>

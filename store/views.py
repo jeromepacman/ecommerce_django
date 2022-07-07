@@ -1,5 +1,4 @@
 import stripe
-
 from django.http import Http404, JsonResponse, HttpResponseNotFound
 from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse
@@ -127,7 +126,7 @@ class ConfirmationView(View):
 
     def get(self, request):
         send_confirmation_email_task(request)
-        return redirect('home')
+        return redirect('shop:home')
 
 
 class CreateCheckoutSession(View):
@@ -135,6 +134,7 @@ class CreateCheckoutSession(View):
         https://stripe.com/docs/api/checkout/sessions/create?lang=python
         Create a payment checkout session for cart items with stripe
     """
+
     def post(self, request, **kwargs):
         get_object_or_404(Product, pk=self.kwargs['pk'])
         stripe.api_key = STRIPE_SECRET_KEY
@@ -155,12 +155,12 @@ class CreateCheckoutSession(View):
 
         checkout_session = stripe.checkout.Session.create(
 
-            customer_email=self.request.user.username,
+            customer_email=request.POST['email'],
             payment_method_types=['card'],
             line_items=lineitems,
             mode='payment',
             success_url=request.build_absolute_uri(
-                reverse("shop:success")
+                reverse('shop:success')
             ) + "?session_id={CHECKOUT_SESSION_ID}",
             cancel_url=request.build_absolute_uri(reverse('shop:failed')),
         )

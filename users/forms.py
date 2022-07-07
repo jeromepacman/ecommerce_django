@@ -9,7 +9,7 @@ from django.contrib import messages
 
 class UserRegisterForm(UserCreationForm):
     """
-        A form that creates a user, with no privileges.
+        A form to creates a user
     """
     username = forms.CharField(
         widget=forms.TextInput(attrs={"class": 'form-control', 'placeholder': 'Email *'}))

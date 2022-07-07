@@ -42,10 +42,6 @@
 
                                     </li>
                                     <li><a href="#">Adresse * <span>
-
-                                        {% if not user.user_shipping_address.address_one %}
-                                            DONNEES MANQUANTES
-                                        {% endif %}
                                         {{ user.user_shipping_address.address_one }}</span></a>
                                     </li>
                                     <li><a href="#">Code postal *<span>
@@ -109,7 +105,7 @@
                                 <div class="col-md-12 form-group">
                                     <input type="text" name="email" class="form-control"
                                            placeholder="Entrez votre email"
-                                           maxlength="100" id="email">
+                                           maxlength="100" required="" id="email">
                                 </div>
 
                                 <button type="submit" value="submit" class="primary-btn"
@@ -136,26 +132,26 @@
                                             return;
                                         }
 
-                                                    $.ajax({
-                                                        url: ('#checkout-button' |> $).data('url_root'),
-                                                        type: 'POST',
-                                                        data: {
-                                                            'email': email,
-                                                            'sum': $('#checkout-button').data('id')
-                                                        },
-                                                        headers: {'X-CSRFToken': csrftoken},
-                                                        mode: 'same-origin',
-                                                        success: function (session) {
-                                                            const d = new Date();
-                                                            d.setTime(d.getTime());
-                                                            const expires = "expires=" + d.toUTCString();
-                                                            document.cookie = 'cart' + "=" + '' + ";" + expires + ";path=/";
-                                                            return stripe.redirectToCheckout({sessionId: session.sessionId});
+                                        $.ajax({
+                                            url: $('#checkout-button').data('url_root'),
+                                            type: 'POST',
+                                            data: {
+                                                'email': email,
+                                                'sum': $('#checkout-button').data('id')
+                                            },
+                                            headers: {'X-CSRFToken': csrftoken},
+                                            mode: 'same-origin',
+                                            success: function (session) {
+                                                const d = new Date();
+                                                d.setTime(d.getTime());
+                                                const expires = "expires=" + d.toUTCString();
+                                                document.cookie = 'cart' + "=" + '' + ";" + expires + ";path=/";
+                                                return stripe.redirectToCheckout({sessionId: session.sessionId});
 
                                             },
 
                                         })
-                                    })
+                                    });
 
                                 </script>
                             </div>

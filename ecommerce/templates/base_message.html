@@ -1,14 +1,13 @@
 {% if messages %}
 {% for message in messages %}
 {% if message.tags == 'success'%}
-<div class='col-md-12 message alert alert-success'>{{message}}</div>
+<div class='col-md-12 message alert-success'>{{message}}</div>
 {% elif message.tags == 'info'%}
-<div class='col-md-12 message alert alert-info' >{{message}}</div>
+<div class='col-md-12 message alert-info' >{{message}}</div>
 {% elif message.tags == 'warning'%}
-<div class='col-md-12 message alert alert-warning'>{{message}}</div>
+<div class='col-md-12 message alert-warning'>{{message}}</div>
 {% elif message.tags == 'error'%}
-<div class='col-md-12 message alert alert-danger'>{{message}}</div>
+<div class='col-md-12 message alert-danger'>{{message}}</div>
 {% endif %}
 {% endfor %}
 {% endif %}
-

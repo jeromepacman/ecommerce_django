@@ -14,7 +14,7 @@
 			<div class="col-first">
 				<h1>Produits par catégorie</h1>
 				<nav class="d-flex align-items-center">
-					<a href="{% url 'shop:home' %}">Home<<span"></span></a>
+					<a href="{% url 'shop:home' %}">Home<span>—></span></a>
 					<a href="{% url 'shop:categories' %}">Catégories</a>
 				</nav>
 			</div>
@@ -39,8 +39,7 @@
 					<div class="head">Marques</div>
 					<ul class="main-categories">
 						{% for brand in brands %}
-						<li class="main-nav-list"><a href="{% url 'shop:product_by_brand' pk=brand.id %}">
-								{{brand.name}}</a>
+						<li class="main-nav-list"><a href="{% url 'shop:product_by_brand' pk=brand.id %}">{{brand.name}}</a>
 						</li>
 						{% endfor %}
 					</ul>
@@ -52,7 +51,7 @@
 			<section class="lattest-product-area pb-40 category-list">
 				<div class="row mx-auto">
 					{% for product in products %}
-					<div class="col-lg-4 col-md-6">
+					    <div class="col-lg-4 col-md-6">
 
 						<div class="single-product mx-auto">
 							<a href="{% url 'shop:product_detail' product.id %}">

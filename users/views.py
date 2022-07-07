@@ -26,7 +26,7 @@ def register(request):
                                        alt_mobile_no=form.cleaned_data.get('alt_mobile_no', None))
             logger.info("User registered successfully")
             messages.info(request, "Enregistrement terminé, vous pouvez vous identifier")
-            return redirect("login")
+            return redirect("accounts:login")
         return render(request, "registration.html", {"form": form, "cartitems": cookiecart(request)['cartitems']})
     except Exception as ex:
         logger.info("Exception raised in registering user -- {0}".format(ex.args))
@@ -46,7 +46,8 @@ def login(request):
             if "next" in request.GET:
                 return redirect(request.GET.get('next'))
             logger.info("User with name {0} logged in successfully".format(form.get_user()))
-            return redirect("home")
+            messages.success(request, "Identification réussie")
+            return redirect("shop:home")
         logger.info("User entered invalid login credentials")
         return render(request, template_name="login.html",
                       context={"form": form, "cartitems": cookiecart(request)['cartitems']})
@@ -56,7 +57,7 @@ def login(request):
                       context={"form": form, "cartitems": (cookiecart(request)['cartitems'])})
 
 
-@login_required(login_url="login")
+@login_required(login_url="accounts:login")
 def edit_profile(request):
     """
         Allows user to view and edit profile.
@@ -73,8 +74,6 @@ def edit_profile(request):
                                        request.user, "user_shipping_address") else None,
                                    "zipcode": request.user.user_shipping_address.zipcode
                                    if hasattr(request.user, "user_shipping_address") else None,
-                                   "address_two": request.user.user_shipping_address.address_two if hasattr(
-                                       request.user, "user_shipping_address") else None,
                                    "mobile_no": request.user.user_profile.mobile_no
                                    if hasattr(request.user, "user_profile") else None,
                                    "alt_mobile_no": request.user.user_profile.alt_mobile_no
@@ -87,14 +86,14 @@ def edit_profile(request):
                   form.cleaned_data.get('username'), form.cleaned_data.get('username')
             request.user.save()
             Profile.objects.update_or_create(user=request.user,
-                                             defaults={"tel mobile": form.cleaned_data.get('mobile_no'),
-                                                       "autre": form.cleaned_data.get('alt_mobile_no')})
+                                             defaults={"mobile_no": form.cleaned_data.get('mobile_no'),
+                                                       "alt_mobile_no": form.cleaned_data.get('alt_mobile_no')})
             ShippingAddress.objects.update_or_create(user=request.user, defaults={"address_one": form.cleaned_data.get(
                 'address_one'), "address_two": form.cleaned_data.get('address_two'),
                 "zipcode": form.cleaned_data.get('zipcode')})
-            messages.success()
+            messages.success(request, "Vos informations ont été mises à jour")
             logger.info("Profile of user with name {0} edited successfully".format(request.user.username))
-            return redirect('home')
+            return redirect('shop:home')
         return render(request, 'edit_profile.html', {"form": form, "cartitems": cookiecart(request)['cartitems']})
     except Exception as ex:
         logger.info("Exception raised in editing profile-- {0}".format(ex.args))
@@ -102,7 +101,7 @@ def edit_profile(request):
                       context={"form": form, "cartitems": cookiecart(request)['cartitems']})
 
 
-@login_required(login_url="login")
+@login_required(login_url="accounts:login")
 def change_password(request):
     """
         Allows user to change password and allow login with new password.
@@ -114,8 +113,9 @@ def change_password(request):
             request.user.save()
             # Updates password in current session and logs out current user from all other sessions
             update_session_auth_hash(request, request.user)
+            messages.success(request, "Votre mot de passe a été changé")
             logger.info("Password of user with name {0} changed successfully".format(request.user.username))
-            return redirect('home')
+            return redirect('accounts:login')
         return render(request, "change_password.html",
                       {"form": form, "cartitems": cookiecart(request)['cartitems']})
     except Exception as ex:
@@ -135,11 +135,11 @@ def forgot_password(request):
             ForgotPassword.objects.create(user=user)
             send_reset_email_task(subject="Reset your password", context={"user": user}, from_email=EMAIL_HOST_USER,
                                   to=[user.email], html_email_template_name="email_template.html")
-            logger.info("Un lien vous a été envoyé")
+            logger.info("Reset password link sent to user successfully")
             messages.success(request,
                              message="Un email vous a été envoyé, veuillez consulter votre courriel, merci.",
                              )
-            return redirect('login')
+            return redirect('accounts:login')
         return render(request, template_name="forgot_password.html",
                       context={"form": form, "cartitems": cookiecart(request)['cartitems']})
     except Exception as ex:
@@ -178,11 +178,11 @@ def password_reset_complete(request):
                       )
 
 
-@login_required(login_url="login")
+@login_required(login_url="accounts:login")
 def logout(request):
     """
         Logs out the user if they are logged in.
     """
     auth_logout(request)
     messages.success(request, "Déconnexion réussie")
-    return redirect('home')
+    return redirect('accounts:login')

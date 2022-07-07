@@ -159,10 +159,10 @@ LOGGING = {
     },
 }
 
-# Primary key configuration for Django version 3+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'accounts:login'
 
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 
