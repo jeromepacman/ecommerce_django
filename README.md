@@ -1,1 +1,1 @@
-https://trailingcoin.fr
+https://trailingcoin.com
